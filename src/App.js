@@ -1,12 +1,11 @@
 import Header from "./components/Header";
+import CountryData from "./components/CountryData";
 import useFetch from "./utils/useFetch";
 
 function App() {
   const { data, isLoading, error } = useFetch(
     "https://api.covid19api.com/summary"
   );
-
-  console.log(data);
 
   return (
     <div className="App">
@@ -20,7 +19,27 @@ function App() {
           </h1>
         </div>
       </div>
-      <Header data={data} isLoading={isLoading} error={error} />
+
+      {isLoading && (
+        <div className="section">
+          <div className="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="section">
+          <div className="error">
+            <h3>{error}</h3>
+          </div>
+        </div>
+      )}
+      <Header data={data} />
+      <CountryData data={data} />
     </div>
   );
 }
