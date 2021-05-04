@@ -1,4 +1,5 @@
 import { useState } from "react";
+import moment from "moment";
 
 const CountryData = ({ data }) => {
   let countries = [];
@@ -35,12 +36,15 @@ const CountryData = ({ data }) => {
           </div>
           {country && (
             <div className="country-stats">
-              <h4>Last Updated: {country[0].Date}</h4>
+              <h4>
+                Last Updated:{" "}
+                {moment(country[0].Date).format("MMMM Do YYYY, h:mm:ssa")}
+              </h4>
               <div className="stats">
                 <h3>New Confirmed: {country[0].NewConfirmed}</h3>
               </div>
               <div className="stats">
-                <h3>New Deaths: {country[0].NewDeath}</h3>
+                <h3>New Deaths: {country[0].NewDeaths}</h3>
               </div>
               <div className="stats">
                 <h3>New Recovered:{country[0].NewRecovered}</h3>

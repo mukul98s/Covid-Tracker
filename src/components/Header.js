@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const Header = ({ data }) => {
   return (
     <>
@@ -7,7 +9,10 @@ const Header = ({ data }) => {
             <h4>Global Data</h4>
           </div>
           <div className="global-stats">
-            <h4>Last Updated: {data.Global.Date}</h4>
+            <h4>
+              Last Updated:{" "}
+              {moment(data.Global.Date).format("MMMM Do YYYY, h:mm:ssa")}
+            </h4>
             <div className="stats">
               <h3>New Confirmed: {data.Global.NewConfirmed}</h3>
             </div>
