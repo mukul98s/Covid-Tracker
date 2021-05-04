@@ -7,6 +7,13 @@ function App() {
     "https://api.covid19api.com/summary"
   );
 
+  const numberWithCommas = (x) => {
+    x = x.toString();
+    const pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x)) x = x.replace(pattern, "$1,$2");
+    return x;
+  };
+
   return (
     <div className="App">
       <div className="title">
@@ -22,11 +29,13 @@ function App() {
 
       {isLoading && (
         <div className="section">
-          <div className="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+          <div className="loader">
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
           </div>
         </div>
       )}
@@ -34,12 +43,22 @@ function App() {
       {error && (
         <div className="section">
           <div className="error">
-            <h3>{error}</h3>
+            <h3>
+              <span>
+                <i class="fas fa-sad-tear"></i>
+              </span>
+              {error}
+            </h3>
           </div>
         </div>
       )}
-      <Header data={data} />
-      <CountryData data={data} />
+
+      {!error && !isLoading && (
+        <>
+          <Header data={data} format={numberWithCommas} />
+          <CountryData data={data} format={numberWithCommas} />
+        </>
+      )}
     </div>
   );
 }
