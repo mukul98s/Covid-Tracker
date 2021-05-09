@@ -24,7 +24,7 @@ const CountryData = ({ data, format }) => {
         <h4 className="search-country">Search By Country</h4>
         <div className="country">
           <div className="select-country">
-            <select name="country" onClick={filterHandler}>
+            <select name="country" onChange={filterHandler}>
               {countries.map((country, index) => {
                 return (
                   <option value={country} key={index}>
